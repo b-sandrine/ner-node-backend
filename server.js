@@ -12,6 +12,10 @@ app.use(cors())
 require('./src/config/db')
 const routes = require('./src/routes/user.route')
 
+const swagger = require('./swagger')
+
+swagger(app);
+
 app.get('/',(req,res) => {
     res.send('Welcome to backend tutorial')
 })

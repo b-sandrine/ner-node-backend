@@ -5,7 +5,7 @@ const KEY = process.env.SECRET_KEY;
 
 const verifyToken = ( req, res, next ) => {
     const token = req.headers.token;
-
+    
     if(!token) {
         return res.status(401).json({error: "unauthorized"})
     }
