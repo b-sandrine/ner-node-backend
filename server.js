@@ -9,9 +9,14 @@ const app = express();
 app.use(json)
 app.use(cors())
 
+require('./src/config/db')
+const routes = require('./src/routes/user.route')
+
 app.get('/',(req,res) => {
     res.send('Welcome to backend tutorial')
 })
+
+app.use('/api',routes)
 
 app.listen(PORT, function() {
     console.log(`app running on http://localhost:${PORT}`);
