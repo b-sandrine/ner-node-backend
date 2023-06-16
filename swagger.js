@@ -42,6 +42,24 @@ const options = {
                         },
                     },
                 },
+                Product: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string'
+                        },
+                        type: {
+                            type: 'string'
+                        },
+                        quantity: {
+                            type: 'integer'
+                        },
+                        createdBy: {
+                            type: 'string',
+                            description: 'Foreign key referencing the User model'
+                        }
+                    }
+                }
             },
         },
     },
