@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router();
 
-const {addProduct} = require('../controllers/product.controller')
-const {authUser} = require('../auth/authMiddleware')
+const {authUser} = require('../auth/authMiddleware');
+const { addVehicles } = require('../controllers/vehicles.controller');
  
 /**
  * @swagger
- * /api/products/create:
+ * /api/vehicles/create:
  *   post:
  *     summary: Create product
  *     description: Create a new product by an authenticated user
@@ -25,6 +25,6 @@ const {authUser} = require('../auth/authMiddleware')
  *               $ref: '#/components/schemas/Product'
  */
 
-router.post('/create',authUser, addProduct )
+router.post('/create',authUser, addVehicles )
 
 module.exports = router;

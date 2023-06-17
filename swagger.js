@@ -42,17 +42,26 @@ const options = {
                         },
                     },
                 },
-                Product: {
+                Vehicle: {
                     type: 'object',
                     properties: {
-                        name: {
-                            type: 'string'
-                        },
-                        type: {
-                            type: 'string'
-                        },
-                        quantity: {
+                        chasisNumber: {
                             type: 'integer'
+                        },
+                        manufacturer: {
+                            type: 'string'
+                        },
+                        manufacturedYear: {
+                            type: 'integer'
+                        },
+                        price: {
+                            type: 'integer'
+                        },
+                        plateNumber: {
+                            type: 'string'
+                        },
+                        model: {
+                            type: 'string'
                         },
                         createdBy: {
                             type: 'string',
