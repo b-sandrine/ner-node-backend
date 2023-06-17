@@ -18,8 +18,23 @@ const addOwner = async (req, res) => {
     }
     catch (err) {
         console.log(err)
-        res.status(400).json({ error: "Failed to save user" })
+        res.status(400).json({ error: "Failed to save owner" })
     }
 }
 
-module.exports = { addOwner }
+const getOwners = async(req,res) => {
+    try {
+        const result = await Owner.find()
+
+        if(result) {
+            return res.status(200).json({result})
+        }
+        res.status(400).json({error: "unable to fetch data "})
+    }
+    catch(err) {
+        console.log(err)
+        res.status(500).json({error: "Server Error"})
+    }
+}
+
+module.exports = { addOwner, getOwners }

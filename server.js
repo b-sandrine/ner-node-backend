@@ -12,6 +12,7 @@ app.use(cors())
 require('./src/config/db')
 const userRoutes = require('./src/routes/user.route')
 const vehicleRoutes = require('./src/routes/vehicles.route')
+const ownerRoutes = require('./src/routes/owner.route')
 
 const swagger = require('./swagger')
 
@@ -23,6 +24,7 @@ app.get('/',(req,res) => {
 
 app.use('/api/users',userRoutes)
 app.use('/api/vehicles', vehicleRoutes)
+app.use('/api/owners/', ownerRoutes)
 
 app.listen(PORT, function() {
     console.log(`app running on http://localhost:${PORT}`);

@@ -68,6 +68,23 @@ const options = {
                             description: 'Foreign key referencing the User model'
                         }
                     }
+                },
+                Owner: {
+                    type: 'object',
+                    properties: {
+                        fullnames: {
+                            type: 'string'
+                        },
+                        nid: {
+                            type: 'integer'
+                        },
+                        phoneNumber : {
+                            type: 'string'
+                        },
+                        address: {
+                            type: 'string'
+                        }
+                    }
                 }
             },
         },
