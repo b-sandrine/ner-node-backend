@@ -2,29 +2,30 @@ const express = require('express')
 const router = express.Router();
 
 const {authUser} = require('../auth/authMiddleware');
-const { addVehicles } = require('../controllers/vehicles.controller');
+const { addVehicles, getVehicles } = require('../controllers/vehicles.controller');
  
 /**
  * @swagger
  * /api/vehicles/create:
  *   post:
- *     summary: Create product
- *     description: Create a new product by an authenticated user
+ *     summary: Create Vehicle
+ *     description: Create a new Vehicl by an authenticated user
  *     responses:
  *       '201':
- *         description: Product created
+ *         description: Vehicle registered
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Product'
+ *               $ref: '#/components/schemas/Vehicle'
  *       '401':
  *         description: Unauthorized
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Product'
+ *               $ref: '#/components/schemas/Vehicle'
  */
 
-router.post('/create',authUser, addVehicles )
+router.post('/create', addVehicles )
+router.get('/list', getVehicles);
 
 module.exports = router;

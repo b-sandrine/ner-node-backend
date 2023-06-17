@@ -1,37 +1,39 @@
 const mongoose = require('mongoose')
-
+const Joi = require('joi')
 const vehiclesSchema = mongoose.Schema({
     chasisNumber: {
-        type: Number,
-        required: true
+        type: String,
     },
     manufacturer: {
         type: String,
-        required: true
     },
     year: {
         type: Number,
-        required: true
     },
     price: {
         type: Number,
-        required: true
     },
     plateNumber: {
         type: String,
-        required: true
     },
     model: {
         type: String,
-        required: true
     },
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-        required:true
+    owner: {
+        type: String,
     }
 })
 
 const Vehicles = mongoose.model("vehicles", vehiclesSchema)
 
-module.exports = Vehicles;
+const validVehicle = Joi.object({
+    chasisNumber: Joi.string().required(),
+    manufacturer: Joi.string().required(),
+    year: Joi.number().integer().required(),
+    price: Joi.number().integer().required(),
+    plateNumber: Joi.string().required(),
+    model: Joi.string().required(),
+    owner: Joi.string().required()
+})
+
+module.exports = { Vehicles, validVehicle};
