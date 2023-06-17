@@ -37,5 +37,9 @@ const validUser = Joi.object({
     password: Joi.string().min(6).required(),
 })
 
+const validLoginUser = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required(),
+})
 
-module.exports = {User, validUser};
+module.exports = {User, validUser, validLoginUser};
