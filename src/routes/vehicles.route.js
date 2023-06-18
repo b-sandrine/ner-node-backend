@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const {authUser} = require('../auth/authMiddleware');
+const {verifyToken} = require('../auth/authMiddleware');
 const { addVehicles, getVehicles } = require('../controllers/vehicles.controller');
  
 /**
@@ -25,7 +25,7 @@ const { addVehicles, getVehicles } = require('../controllers/vehicles.controller
  *               $ref: '#/components/schemas/Vehicle'
  */
 
-router.post('/create', addVehicles )
-router.get('/list', getVehicles);
+router.post('/create',verifyToken, addVehicles )
+router.get('/list',verifyToken, getVehicles);
 
 module.exports = router;

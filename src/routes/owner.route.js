@@ -29,8 +29,8 @@ const { verifyToken } = require('../auth/authMiddleware');
  *             schema:
  *               $ref: '#/components/schemas/Owner'
  */
-router.post('/create', addOwner);
-router.get('/list', getOwners);
+router.post('/create', verifyToken, addOwner);
+router.get('/list', verifyToken, getOwners);
 
 
 module.exports = router;
