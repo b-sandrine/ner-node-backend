@@ -4,13 +4,30 @@ const Owner = require('../models/owner.model');
 const addVehicles = async (req, res) => {
   try {
     const { chasisNumber, manufacturer, year, price, plateNumber, model, createdBy } = req.body;
+
+    const vehicle = {
+      chasisNumber,
+      manufacturer,
+      year,
+      price,
+      plateNumber,
+      model,
+      createdBy,
+    };
+
+    const { error } = validVehicle.validate(vehicle);
+
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+
     const owner = await Owner.findById(createdBy);
 
     if (!owner) {
-      return res.status(400).json({ error: 'Owner Not Found' });
+      return res.status(400).json({ error: 'Owner cannot be empty' });
     }
 
-    const vehicle = {
+    const vehicleToBeSaved = {
       chasisNumber,
       manufacturer,
       year,
@@ -20,15 +37,8 @@ const addVehicles = async (req, res) => {
       owner: owner.fullnames,
     };
 
-    const { error } = validVehicle.validate(vehicle);
-    console.log("I am here")
 
-    if (error) {
-      return res.status(400).json({ error: error.details[0].message });
-    }
-
-
-    const newVehicle = new Vehicles(vehicle);
+    const newVehicle = new Vehicles(vehicleToBeSaved);
     await newVehicle
       .save()
       .then((savedVehicle) => {

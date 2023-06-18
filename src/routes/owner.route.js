@@ -1,5 +1,5 @@
 const express = require('express')
-const {addOwner, getOwners} = require('../controllers/owner.controller')
+const {addOwner, getOwners, updateOwner, deleteOwner} = require('../controllers/owner.controller')
 
 const router = express.Router();
 const { verifyToken } = require('../auth/authMiddleware');
@@ -31,6 +31,7 @@ const { verifyToken } = require('../auth/authMiddleware');
  */
 router.post('/create', verifyToken, addOwner);
 router.get('/list', verifyToken, getOwners);
-
+router.put('/update/:id', verifyToken, updateOwner)
+router.delete('/delete/:id',verifyToken,deleteOwner)
 
 module.exports = router;

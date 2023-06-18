@@ -37,4 +37,39 @@ const getOwners = async(req,res) => {
     }
 }
 
-module.exports = { addOwner, getOwners }
+const updateOwner = async (req, res) => {
+    try {
+      const ownerId = req.params.id;
+      const updateData = req.body;
+  
+      const owner = await Owner.findByIdAndUpdate(ownerId, updateData, { new: true });
+  
+      if (!owner) {
+        return res.status(404).json({ error: 'Owner not found' });
+      }
+  
+      res.json({ message: 'Owner updated successfully', data: owner });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
+    }
+};
+
+const deleteOwner = async (req, res) => {
+    try {
+      const ownerId = req.params.id;
+  
+      const owner = await Owner.findByIdAndDelete(ownerId);
+  
+      if (!owner) {
+        return res.status(404).json({ error: 'Owner not found' });
+      }
+  
+      res.json({ message: 'Owner deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  };
+
+module.exports = { addOwner, getOwners, updateOwner, deleteOwner }

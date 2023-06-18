@@ -33,7 +33,7 @@ const validVehicle = Joi.object({
     price: Joi.number().integer().required(),
     plateNumber: Joi.string().required(),
     model: Joi.string().required(),
-    owner: Joi.string().required()
+    createdBy: Joi.string().required()
 })
 
 module.exports = { Vehicles, validVehicle};
