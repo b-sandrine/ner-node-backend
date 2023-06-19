@@ -57,10 +57,18 @@ const addVehicles = async (req, res) => {
 
 const getVehicles = async (req, res) => {
   try {
-    const result = await Vehicles.find();
+    const pageSize = 10;
+    const currentPage = req.headers.count;
+    console.log(currentPage);
+    const skipCount = (currentPage - 1) * pageSize;
+    const result = await Vehicles.find().skip(skipCount).limit(pageSize)
+    const totalCount = await Owner.countDocuments();
 
     if (result) {
-      return res.status(200).json({ result });
+      return res.status(200).json({ 
+        result,
+        totalCount: totalCount
+      });
     }
     res.status(400).json({ error: 'Unable to fetch data' });
   } catch (err) {

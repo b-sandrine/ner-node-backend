@@ -23,11 +23,20 @@ const addOwner = async (req, res) => {
 }
 
 const getOwners = async(req,res) => {
+  const pageSize = 10;
+  const currentPage = req.headers.count;
+  console.log(currentPage);
+  const skipCount = (currentPage - 1) * pageSize;
     try {
-        const result = await Owner.find()
+        const result = await Owner.find().skip(skipCount).limit(pageSize)
+
+        const totalCount = await Owner.countDocuments();
 
         if(result) {
-            return res.status(200).json({result})
+            return res.status(200).json({
+              result,
+              totalCount: totalCount
+            })
         }
         res.status(400).json({error: "unable to fetch data "})
     }
